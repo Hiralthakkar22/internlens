@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/* Colors live in CSS variables so one attribute (data-theme) switches the whole app.
+   Tailwind classes like bg-panel / text-mint read these variables. */
+:root,
+[data-theme="dark"] {
+  --night: #0e1726; /* page */
+  --panel: #152238; /* cards, sidebar */
+  --raised: #1c2c47; /* inputs, hover */
+  --line: #26375a; /* borders */
+  --text: #e6ecf5;
+  --muted: #93a3bc;
+  --mint: #4fd6a6; /* good: bond free, selected, primary actions */
+  --mint-ink: #08251b; /* text on mint */
+  --coral: #ff7a6b; /* bond alert, errors */
+  --amber: #f5b84b; /* money */
+  --sky: #7cb4ff; /* neutral info */
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --night: #eef2f8;
+  --panel: #ffffff;
+  --raised: #f4f7fb;
+  --line: #d8e0ec;
+  --text: #13203a;
+  --muted: #5a6a85;
+  --mint: #0f8a62;
+  --mint-ink: #ffffff;
+  --coral: #cf3f34;
+  --amber: #a8690a;
+  --sky: #2f6fd6;
+  color-scheme: light;
+}
+
+@theme inline {
+  --font-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-num: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-night: var(--night);
+  --color-panel: var(--panel);
+  --color-raised: var(--raised);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-mint: var(--mint);
+  --color-mint-ink: var(--mint-ink);
+  --color-coral: var(--coral);
+  --color-amber: var(--amber);
+  --color-sky: var(--sky);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--night);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+  }
+  :focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--mint) 35%, transparent);
+  }
+}
+
+/* Small reusable pieces. Kept here so JSX stays readable. */
+@utility num {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+@utility field {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--raised);
+  padding: 0.6rem 0.8rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s;
+  &::placeholder {
+    color: var(--muted);
+    opacity: 0.7;
+  }
+  &:focus {
+    border-color: var(--mint);
+  }
+  &[aria-invalid="true"] {
+    border-color: var(--coral);
+  }
+}
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 10px;
+  padding: 0.6rem 1.1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.15s, opacity 0.15s, transform 0.1s;
+  &:active {
+    transform: translateY(1px);
+  }
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+@utility btn-primary {
+  background: var(--mint);
+  color: var(--mint-ink);
+  &:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--mint) 88%, var(--text));
+  }
+}
+
+@utility btn-ghost {
+  border: 1px solid var(--line);
+  color: var(--text);
+  &:hover:not(:disabled) {
+    background: var(--raised);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
