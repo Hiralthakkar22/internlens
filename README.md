@@ -154,6 +154,8 @@ Demo logins after seeding:
 | Admin | admin@internlens.dev | Admin@1234 |
 | Student | demo@internlens.dev | Demo@1234 |
 
+Note : These are for your local setup. On the live demo the admin password is different.
+
 All companies in the demo data are made up, so the numbers can't be mistaken for real information about real companies.
 
 ## Deploy
