@@ -1,5 +1,7 @@
 # InternLens
 
+**Live demo:** https://internlens.vercel.app (try it with `demo@internlens.dev` / `Demo@1234`. The first load can take up to a minute because the free server sleeps.)
+
 Check a company before you apply for an internship.
 
 Students share their interview experience: rounds, questions, stipend, bond and result. InternLens turns those posts into a **report card for every company**, so the next student knows what to expect, and whether the offer comes with a bond, before saying yes.
